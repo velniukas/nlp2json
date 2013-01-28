@@ -56,18 +56,13 @@ app.get('/qry', function (req, res) {
 
 	//  res.send(category);
 
-//		res.write(tokens);
-	res.write("[");
+	var data = [];
 	for (i in tokens) {
-		if (i > 0) {
-			res.write(', ');
-		}
-		console.log(tokens[i]);
-		res.write("{'id': '"+tokens[i]+"',");
-		res.write("'label': '"+tokens[i]+"',")
-		res.write("'value': '"+tokens[i]+"'}");
+		var row = {"id": i, "label": ""+tokens[i]+"", "value": ""+tokens[i]+""};
+		data.push(row);
 	}
-	res.write("]");
+	console.log(data);
+	res.write( data.toString() );
   }
   else res.write(false);
   res.end();
