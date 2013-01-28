@@ -50,15 +50,27 @@ app.get('/qry', function (req, res) {
 
   var tokens;
   if (q) {
-  	  res.write('query: '+q+'\n');
+  	  //res.write('query: '+q+'\n');
 	  tokens = q.tokenizeAndStem();
 	//  var category = classifier.getClassifications(req.params.qry);
 	  console.log(tokens);
 	//  console.log(category);
 
 	//  res.send(category);
-	res.write('tokens: '+tokens);
+
+//		res.write(tokens);
+	res.write("{[");
+	for (i in tokens) {
+		if (i > 0) {
+			res.write(', ');
+		}
+		console.log(tokens[i]);
+		res.write("{'id': "+i+", ");
+		res.write("'value': '"+tokens[i]+"'}");
+	}
+	res.write("]}");
   }
+  else res.write(false);
   res.end();
 });
 
