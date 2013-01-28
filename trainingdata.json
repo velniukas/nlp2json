@@ -1,0 +1,15 @@
+{ "data": [
+
+	{"query": "i am long qqqq", "category": "buy"},
+	{"query": "buy the q''s", "category": "buy"},
+	{"query": "short gold", "category": "sell"},
+	{"query": "sell gold", "category": "sell"},
+
+	{"query": "list all qqq?", "category": "list"},
+	{"query": "find all qqq?", "category": "list"},
+	{"query": "find the largest qqq?", "category": "largest"},
+	{"query": "what is the biggest qqq?", "category": "largest"},
+	{"query": "in what city is qqq?", "category": "location"},
+	{"query": "where can I find qqq?", "category": "location"},
+	{"query": "is qqq in yyy?", "category": "boolean"}
+]}

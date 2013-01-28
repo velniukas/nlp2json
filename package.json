@@ -1,0 +1,13 @@
+{
+  "name": "nlp2json qry",
+  "description": "Converts a natural language query into an arbitrary json schema",
+  "author": "Steve Messina <steve.g.messina@gmail.com>",
+  "dependencies": {
+    "express": "3.1.0",
+    "jade": "0.28.1",
+    "natural": "0.1.19"
+  },
+  "devDependencies": {
+  },
+  "engine": "node >= 0.8.0"
+}
