@@ -42,8 +42,6 @@ app.get('/', function (req, res) {
 app.get('/qry', function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
 
-  res.write('Answer.\n');
-
   var q = req.param('q');
   console.log('--------------------------------------------------------------------');
   console.log('query = '+q);
@@ -59,16 +57,17 @@ app.get('/qry', function (req, res) {
 	//  res.send(category);
 
 //		res.write(tokens);
-	res.write("{[");
+	res.write("[");
 	for (i in tokens) {
 		if (i > 0) {
 			res.write(', ');
 		}
 		console.log(tokens[i]);
-		res.write("{'id': "+i+", ");
+		res.write("{'id': '"+tokens[i]+"',");
+		res.write("'label': '"+tokens[i]+"',")
 		res.write("'value': '"+tokens[i]+"'}");
 	}
-	res.write("]}");
+	res.write("]");
   }
   else res.write(false);
   res.end();
