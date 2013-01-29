@@ -88,7 +88,11 @@ app.get('/qry', function (req, res) {
 		var lemma = wordnet.lookup( phrase, function( results ) {
 			results.some( function(result) {
 				console.log(phrase + ": " + result.pos + ", " + result.lemma + ", " + result.gloss);
-				data.push( {value: result.lemma} );
+//				data.push( {value: result.lemma} );
+				console.log('dirty: '+JSON.stringify(tokens));
+				// remove any tokens that are part of this bigram
+				tokens.splice(i-1, 2, result.lemma);
+				console.log('clean: '+JSON.stringify(tokens));
 				return result.lemma;
 			});
 		});
