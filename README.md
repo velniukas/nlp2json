@@ -1,3 +1,5 @@
+The goal here is roughly to map keywords from a natural language query to a target schema 
+and create a json query to pull out the relevant data.
 
 To install:
 
