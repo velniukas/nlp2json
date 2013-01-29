@@ -1,6 +1,6 @@
 var natural = require('natural'),
   classifier = new natural.BayesClassifier(),
-  tokenizer = new natural.WordTokenizer();
+  tokenizer = new natural.TreebankWordTokenizer(); // natural.WordTokenizer();
 
   natural.PorterStemmer.attach();
 
@@ -49,6 +49,8 @@ app.get('/qry', function (req, res) {
   var tokens;
   if (q) {
   	  //res.write('query: '+q+'\n');
+	  //tokens = tokenizer.tokenize(q); 
+	  // or can do tokenize and stem
 	  tokens = q.tokenizeAndStem();
 	//  var category = classifier.getClassifications(req.params.qry);
 	  console.log(tokens);
@@ -58,7 +60,8 @@ app.get('/qry', function (req, res) {
 
 	var data = [];
 	for (i in tokens) {
-		var row = {id: i+"", label: tokens[i]+"", value: tokens[i]+""};
+		//var row = {id: i+"", label: tokens[i]+"", value: tokens[i]+""};
+		var row = {value: tokens[i]};
 		data.push(row);
 	}
 	console.log(data);
