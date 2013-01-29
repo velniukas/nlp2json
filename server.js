@@ -58,7 +58,7 @@ app.get('/qry', function (req, res) {
 
 	var data = [];
 	for (i in tokens) {
-		var row = {"id": i, "label": ""+tokens[i]+"", "value": ""+tokens[i]+""};
+		var row = {"label": ""+tokens[i]+"", "value": ""+tokens[i]+""};
 		data.push(row);
 	}
 	console.log(data);

@@ -11,37 +11,46 @@ $(function() {
             	return; //event.preventDefault();
 		})
 		.autocomplete({
-			//dataType: 'json', // this parameter is currently unused
-			//extraParams: {
-			//	format: 'json' // pass the required context to the Zend Controller
-			//},
-			//parse: function(data) {
-			//	var parsed = [];
-			//	data = data.tokens;
-			//	for (var i = 0; i < data.length; i++) {
-			//		parsed[parsed.length] = {
-			//			data: data[i],
-			//			value: data[i].displayName,
-			//			result: data[i].displayName
-			//		};
-			//	}
-			//	return parsed;
-			//},
-			//formatItem: function(item) {
-			//	return item.displayName + ' (' + item.value + ')';
-			//}
+			dataType: 'json', 
+			extraParams: {
+				format: 'json' // pass the required context to the Zend Controller
+			},
+			parse: function(data) {
+				alert('parse: '+data);
+				var array = [];
+				for (var i = 0; i < data.items.length; i++) {
+					array[array.length] = {
+						data: data.items[i],
+						value: data.items[i],
+						result: data.items[i]
+					};
+				}
+				return parsed;
+			},
+			formatItem: function(row) {
+				return row.value;
+			},
 			source: function( request, response ) {
 				var term = request.term;
 				if (term in cache) {
 					response([cache[term]]);
 					return;
 				}
-				$.getJSON( "http://localhost:3000/qry?q="+term, request, function(data, status, xhr) {
-					//data = {id: 0, label: 'testing', value: 'test'};
-					alert('received: '+data);
-					cache[term] = data;
-					response(data);
-				});
+				$.getJSON( "http://localhost:3000/qry?q="+term, request, function() {
+					alert("success");
+				})
+				.success(function(data, status, xhr) { 
+					alert("second success"); 
+					var tokens = [];
+					$.each(JSONObject.data.bindings, function(i, obj) {
+						tokens.push([obj.label.value, obj.value.value]);
+					});
+					alert('received: '+tokens);
+					cache[term] = tokens;
+					response(tokens);
+				})
+				.error(function(data, status, xhr) { alert("error: "+status); })
+				.complete(function() { alert("complete"); });
 			},
 			minLength: 2,
 			select: function( event, ui ) {
