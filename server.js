@@ -84,11 +84,9 @@ app.get('/qry', function (req, res) {
 	// if we find a lemma then this is a single entity (token), e.g. New York
 	for (i in bigrams) {
 		var phrase = bigrams[i].map(function(item) { return item.toString(); }).join(" ");
-		//console.log('phrase: '+phrase);
 		var lemma = wordnet.lookup( phrase, function( results ) {
 			results.some( function(result) {
 				console.log(phrase + ": " + result.pos + ", " + result.lemma + ", " + result.gloss);
-//				data.push( {value: result.lemma} );
 				console.log('dirty: '+JSON.stringify(tokens));
 				// remove any tokens that are part of this bigram
 				tokens.splice(i-1, 2, result.lemma);
