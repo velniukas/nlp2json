@@ -58,11 +58,14 @@ app.get('/qry', function (req, res) {
 
 	var data = [];
 	for (i in tokens) {
-		var row = {"label": ""+tokens[i]+"", "value": ""+tokens[i]+""};
+		var row = {id: i+"", label: tokens[i]+"", value: tokens[i]+""};
 		data.push(row);
 	}
 	console.log(data);
-	res.write( data.toString() );
+	// JSON.parse(...) or data.toString() don't work
+	// only Stringify puts quotes around id, lavel, value which autocomplete expects
+	console.log(JSON.stringify(data));
+	res.write( JSON.stringify(data) );
   }
   else res.write(false);
   res.end();
